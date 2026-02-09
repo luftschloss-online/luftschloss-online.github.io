@@ -322,7 +322,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   display: flex;
   flex-direction: column;
   gap: 18px;
-  animation: sideTickerUp 10s linear infinite;
+  animation: sideTickerUp 30s linear infinite;
 }
 
 .side-ticker__item{
