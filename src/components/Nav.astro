@@ -1,0 +1,29 @@
+---
+const items = [
+  { label: "PROJEKTE", href: "#projects" },
+  { label: "ÜBER UNS", href: "#about" },
+  { label: "KONTAKT", href: "#contact" },
+];
+
+import '../styles/global.css';
+---
+<header class="site-header">
+  <div class="container" style="display:flex; align-items:center; justify-content:space-between; padding:18px 0;">
+    <a href="/#" style="font-family: Unigeo; font-weight:800; font-size:30px;">luftschloss.</a>
+    <nav class="nav-links">
+      {items.map((i) => <a href={i.href} style="opacity:.8;">{i.label}</a>)}
+    </nav>
+
+    <button class="burger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <div class="container mobile-menu__inner">
+    {items.map((l) => (
+      <a href={l.href} class="mobile-link">{l.label}</a>
+    ))}
+  </div>
+</div>

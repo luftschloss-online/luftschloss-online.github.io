@@ -1,0 +1,95 @@
+---
+const {
+  radius = 120,
+  blur = 10,
+} = Astro.props;
+---
+
+<section class="blur-reveal" data-radius={radius}>
+  <!-- blurred base -->
+  <div class="layer layer--blur">
+    <slot />
+  </div>
+
+  <!-- sharp reveal -->
+  <div class="layer layer--sharp">
+    <slot />
+  </div>
+
+  <script is:inline>
+    const root = document.currentScript.closest(".blur-reveal");
+    const sharp = root.querySelector(".layer--sharp");
+
+    root.style.setProperty("--x", "50%");
+    root.style.setProperty("--y", "50%");
+    root.style.setProperty("--r", (root.dataset.radius || 120) + "px");
+
+    const setPos = (clientX, clientY) => {
+      const rect = root.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      root.style.setProperty("--x", `${x}px`);
+      root.style.setProperty("--y", `${y}px`);
+    };
+
+    root.addEventListener("mousemove", (e) => setPos(e.clientX, e.clientY));
+    root.addEventListener("mouseenter", (e) => setPos(e.clientX, e.clientY));
+
+    // touch support
+    root.addEventListener("touchstart", (e) => {
+      const t = e.touches[0];
+      if (t) setPos(t.clientX, t.clientY);
+    }, { passive: true });
+
+    root.addEventListener("touchmove", (e) => {
+      const t = e.touches[0];
+      if (t) setPos(t.clientX, t.clientY);
+    }, { passive: true });
+  </script>
+</section>
+
+<style>
+  .blur-reveal{
+    position: relative;
+    width: 100%;
+    background: transparent;
+
+    --x: 50%;
+    --y: 50%;
+    --r: 120px;
+  }
+
+  .layer{
+    max-width: min(var(--max), calc(100% - 64px));
+    margin: 0 auto;
+    padding: 22px 0;
+  }
+
+  .layer--blur{
+    filter: blur(var(--blur-amt, 10px));
+    opacity: 0.95;
+  }
+
+  .layer--sharp{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .layer--sharp{
+    -webkit-mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 65%,
+      rgba(0,0,0,0) 72%);
+    mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,1) 65%,
+      rgba(0,0,0,0) 72%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+</style>
+
+<style>
+  .blur-reveal{ --blur-amt: 10px; }
+</style>

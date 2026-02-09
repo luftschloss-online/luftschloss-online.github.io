@@ -1,0 +1,37 @@
+---
+import "../styles/global.css";
+
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>luftschloss</title>
+  </head>
+  <body>
+    <div class="side-ticker" aria-hidden="true" style="z-index: 10;">
+      <div class="side-ticker__track">
+        <div class="side-ticker__item">
+         · Digitale Schaufenster · Temporäre Installationen für Events und Marken · Erlebnisse im öffentlichen Raum · Interaktive City-Screens ·
+        </div>
+        <!-- duplicate for seamless loop -->
+        <div class="side-ticker__item">
+         · Digitale Schaufenster · Temporäre Installationen für Events und Marken · Erlebnisse im öffentlichen Raum · Interaktive City-Screens ·
+        </div>
+      </div>
+    </div>
+
+
+    <Nav />
+    <main id="top" class="page">
+      <slot />
+    </main>
+
+    <Footer />
+    <script type="module" src="/scripts/header.js"></script>
+  </body>
+</html>

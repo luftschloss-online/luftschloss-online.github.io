@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MaskReveal from "../components/MaskReveal.astro";
+import CTA from "../components/CTA.astro";
+import ProjectsAccordion from "../components/ProjectsAccordion.jsx";
+
+import InteractiveMask from "../components/InteractiveMask.astro";
+---
+
+<BaseLayout>
+  <!-- HERO -->
+  <section class="section">
+    <div class="container" style="position:relative; z-index:2;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:24px;">
+        <div></div>
+
+        <div style="text-align:right; max-width:640px;">
+          <div class="big-title" style="font-size: clamp(46px, 7vw, 88px);">
+            <span class="ghost">real-world</span><br />
+            interactivity
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">
+          <span>aktuell</span><span class="arrow">&gt;</span>
+      </div>
+    </div>
+
+    <MaskReveal src="/imgs/hero.jpg" alt="Masked hero image" label="2025: PZ | NOVA" />
+    
+    <div class="hero-text-wrap">
+      <div class="hero-text-card">
+        <div class="big-title" style="font-family: Unigeo slim; text-align: left;">
+          <br/><br/><br/><br/><br/>
+          Wir gestalten <span style="font-family: Unigeo;">interaktive<br/>
+          Installationen</span> für den<br/>
+          öffentlichen Raum.
+        </div>
+
+        <div class="small hero-lede" style="text-align: right;">
+          Menschen erleben, berühren und steuern<br/>Inhalte dort, wo sie täglich unterwegs sind –<br/>
+          auf Straßen, Plätzen und bei Events.
+        </div>
+      </div>
+    </div> 
+  </section>
+
+  <!-- INTERACTIVE -->
+    <InteractiveMask radius={140} blur={12}>
+      <div class="card" style="border: 1px solid #ff0000;">
+        <div class="kicker">Manifest</div>
+        <p class="lede">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+      <div class="hr"></div>
+    </InteractiveMask>
+
+  <!-- BELIEF / VIDEO BLOCK -->
+  <section id="about" class="section" style="background: #fff;">
+    <div class="container" style="position:relative; z-index:2;">
+      <div class="kicker" style="text-align:center;">Begin the Dream</div>
+
+      <div class="card dream-media">
+        <img src="/imgs/Imagefilm.png" alt="Begin the Dream" />
+
+        <button class="dream-button">
+          ▶<br/>Begin the Dream
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="hero-text-wrap">
+      <div class="hero-text-card" style="background:none; margin-top: auto;">
+        <div class="mask-gradient"></div> 
+        <div class="big-title" style="text-align: left; z-index: 1;">
+        Wir glauben daran, <span style="font-family: Unigeo slim;">dass</br>
+        Gestaltung und Technik</br>Menschen verbinden.</span></br></br></br></br>
+      </div>
+
+        <div class="small hero-lede" style="text-align: right;">
+        Deshalb schaffen wir Installationen, die zum</br>Mitmachen einladen und Neugier wecken.</br>
+        Aktive Beteiligung, spielerische Interaktion und</br>gemeinsames Erfahren machen jedes Projekt</br>
+        zu einem Erlebnis, das im Gedächtnis bleibt.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHITE BOX START -->
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section" style="background: #fff;z-index:2;">
+    <div class="container" style="margin-top: -50px;">
+      <ProjectsAccordion client:load />
+    </div>
+
+    <div class="hero-text-wrap">
+      <div class="hero-text-card" style="background:none; margin-top: auto;">
+        <div class="big-title" style="text-align: right;">
+        Wir sind luftschloss.<span style="font-family: Unigeo slim;"></br>
+        Hinter jeder Installation steht</br>ein interdisziplinares Team aus</br>
+        Designer:innen und</br>Technikexper:innen.</span></br></br>
+      </div>
+
+        <div class="small hero-lede" style="text-align: left;">
+          Für unsere Projekte nutzen wir modernste</br>Technologien - von interaktiven Systemen bis</br>
+          zu KI-gestützen Workflows - um Inhalte</br>präzise, effizient und kreativ umzusetzen.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- <div class="hr"></div> -->
+
+  
+  <!-- TEAM / STORIES-->
+  <section class="section" style="background: #fff; z-index: 1;">
+    <div class="container" style="position:relative; z-index:2;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; gap: 24px;">
+        <div class="big-title" style="font-size: clamp(44px, 6vw, 78px);">
+          <span style="font-weight:600; color: var(--accent);">dream</span>team
+        </div>
+
+        <div></div>
+      </div>
+
+      <div style="margin-top: 22px;">
+        <MaskReveal src="/imgs/team.jpg" alt="Team masked image" label="Absolut cooles Auto" />
+      </div>
+    </div>
+<!-- WHITE BOX END -->
+  </section>
+
+  <section class="section overlap-section" style="z-index: 1;">
+    <div class="overlap-label">
+    <div style="display:flex; gap:18px; align-items:center;">
+        <div class="section-title">stories</div>
+        <div class="arrow">&gt;</div>
+        <div style="text-align:left; line-height:1.05;font-size: clamp(23px, 4.5vw, 45px);">
+          <div><a href="https://www.instagram.com/luftschloss.agency">insta</a></div>
+          <div><a href=""></a>linkedIn</a></div>
+          <div><a href="https://www.behance.net/mariusrieg"></a>behance</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  <section class="section">
+    <div class="mask-gradient" 
+    style="
+      z-index: 0;
+      background: linear-gradient(220deg, #F4A3B4 0%, #A3B8CA 70%);
+      transform: translateY(0%) rotate(0deg) scale(0.8);
+    "></div> 
+    
+      <div class="grid-card">
+        <div style="display:grid; grid-template-columns: 1fr 1.2fr; align-items:center;">
+          <div style="font-size: 44px; opacity:.75;">
+            meets
+          </div>
+          <div class="logos-grid">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div class="logo-tile">
+                {i % 2 === 0 ? "OTTO" : "PZ"}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>-->
+
+  <CTA />
+</BaseLayout>
