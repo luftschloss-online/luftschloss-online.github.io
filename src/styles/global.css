@@ -283,7 +283,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
   margin-left: auto;
   margin-right: auto;
 
-  /* line up with blob mask above it */
+  /* line up masking above */
   margin-top: calc(-1 * min(40%, 140px));
   margin-right: 70px;
 

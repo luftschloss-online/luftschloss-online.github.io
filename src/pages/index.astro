@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import MaskReveal from "../components/MaskReveal.astro";
+import BlobMask from "../components/BlobMask.astro";
 import CTA from "../components/CTA.astro";
 import ProjectsAccordion from "../components/ProjectsAccordion.jsx";
 
@@ -27,7 +27,7 @@ import InteractiveMask from "../components/InteractiveMask.astro";
       </div>
     </div>
 
-    <MaskReveal src="/imgs/hero.jpg" alt="Masked hero image" label="2025: PZ | NOVA" />
+    <BlobMask src="/imgs/hero.jpg" alt="Masked hero image" label="2025: PZ | NOVA" />
     
     <div class="hero-text-wrap">
       <div class="hero-text-card">
@@ -47,8 +47,8 @@ import InteractiveMask from "../components/InteractiveMask.astro";
   </section>
 
   <!-- INTERACTIVE -->
-    <InteractiveMask radius={140} blur={12}>
-      <div class="card" style="border: 1px solid #ff0000;">
+    <InteractiveMask radius={120} blur={12}>
+      <div class="card" style="border: 0px;">
         <div class="kicker">Manifest</div>
         <p class="lede">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
@@ -56,7 +56,7 @@ import InteractiveMask from "../components/InteractiveMask.astro";
           aliquip ex ea commodo consequat.
         </p>
       </div>
-      <div class="hr"></div>
+      <!-- <div class="hr"></div> -->
     </InteractiveMask>
 
   <!-- BELIEF / VIDEO BLOCK -->
@@ -131,7 +131,7 @@ import InteractiveMask from "../components/InteractiveMask.astro";
       </div>
 
       <div style="margin-top: 22px;">
-        <MaskReveal src="/imgs/team.jpg" alt="Team masked image" label="Absolut cooles Auto" />
+        <BlobMask src="/imgs/team.jpg" alt="Team masked image" label="Absolut cooles Auto" />
       </div>
     </div>
 <!-- WHITE BOX END -->

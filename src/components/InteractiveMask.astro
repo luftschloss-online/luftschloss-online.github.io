@@ -18,33 +18,50 @@ const {
 
   <script is:inline>
     const root = document.currentScript.closest(".blur-reveal");
-    const sharp = root.querySelector(".layer--sharp");
 
-    root.style.setProperty("--x", "50%");
-    root.style.setProperty("--y", "50%");
-    root.style.setProperty("--r", (root.dataset.radius || 120) + "px");
+    let armed = false;
+    requestAnimationFrame(() => { armed = true; });
+
+    let rafId = 0;
+    let rCurrent = 0;
+    const TARGET = Number(root.dataset.radius || 120);
+    const DURATION = 260;
+
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
     const setPos = (clientX, clientY) => {
       const rect = root.getBoundingClientRect();
-      const x = clientX - rect.left;
-      const y = clientY - rect.top;
-      root.style.setProperty("--x", `${x}px`);
-      root.style.setProperty("--y", `${y}px`);
+      root.style.setProperty("--x", `${clientX - rect.left}px`);
+      root.style.setProperty("--y", `${clientY - rect.top}px`);
     };
 
+    const animateR = (toPx) => {
+      cancelAnimationFrame(rafId);
+      const from = rCurrent;
+      const to = toPx;
+      const start = performance.now();
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / DURATION);
+        const v = from + (to - from) * easeOutCubic(t);
+        rCurrent = v;
+        root.style.setProperty("--r", `${v}px`);
+        if (t < 1) rafId = requestAnimationFrame(tick);
+      };
+
+      rafId = requestAnimationFrame(tick);
+    };
+
+    root.addEventListener("mouseenter", (e) => {
+      setPos(e.clientX, e.clientY);
+
+      //avoid glitching here
+      if (!armed) return;
+      requestAnimationFrame(() => animateR(TARGET));
+    });
+
     root.addEventListener("mousemove", (e) => setPos(e.clientX, e.clientY));
-    root.addEventListener("mouseenter", (e) => setPos(e.clientX, e.clientY));
-
-    // touch support
-    root.addEventListener("touchstart", (e) => {
-      const t = e.touches[0];
-      if (t) setPos(t.clientX, t.clientY);
-    }, { passive: true });
-
-    root.addEventListener("touchmove", (e) => {
-      const t = e.touches[0];
-      if (t) setPos(t.clientX, t.clientY);
-    }, { passive: true });
+    root.addEventListener("mouseleave", () => animateR(0));
   </script>
 </section>
 
@@ -56,7 +73,8 @@ const {
 
     --x: 50%;
     --y: 50%;
-    --r: 120px;
+    --r: 0px;
+    transition: --r 280ms cubic-bezier(.2,.8,.2,1);
   }
 
   .layer{
@@ -65,18 +83,43 @@ const {
     padding: 22px 0;
   }
 
+  .layer--sharp,
+  .layer--blur{
+    transition:
+      -webkit-mask-image 280ms cubic-bezier(.2,.8,.2,1),
+      mask-image 280ms cubic-bezier(.2,.8,.2,1);
+
+    /* counter left viewport bleed */
+    padding-inline: calc(var(--blur-amt, 10px) * 2);
+
+  }
+
   .layer--blur{
     filter: blur(var(--blur-amt, 10px));
     opacity: 0.95;
+
+    /* inverse mask */
+    -webkit-mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+      transparent 0%,
+      transparent 65%,
+      #000 72%);
+    mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
+      transparent 0%,
+      transparent 65%,
+      #000 72%);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
   }
 
   .layer--sharp{
     position: absolute;
     inset: 0;
     pointer-events: none;
-  }
 
-  .layer--sharp{
     -webkit-mask-image: radial-gradient(circle var(--r) at var(--x) var(--y),
       rgba(0,0,0,1) 0%,
       rgba(0,0,0,1) 65%,
@@ -85,8 +128,17 @@ const {
       rgba(0,0,0,1) 0%,
       rgba(0,0,0,1) 65%,
       rgba(0,0,0,0) 72%);
+
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+
+    /* avoid flicker */
+    will-change: -webkit-mask-image, mask-image;
   }
 </style>
 
