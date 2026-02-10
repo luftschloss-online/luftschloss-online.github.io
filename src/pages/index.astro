@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlobMask from "../components/BlobMask.astro";
+import BlobMaskTeam from "../components/BlobMaskTeam.astro";
 import CTA from "../components/CTA.astro";
 import ProjectsAccordion from "../components/ProjectsAccordion.jsx";
 
@@ -27,12 +28,12 @@ import InteractiveMask from "../components/InteractiveMask.astro";
       </div>
     </div>
 
-    <BlobMask src="/imgs/hero.jpg" alt="Masked hero image" label="2025: PZ | NOVA" />
+    <BlobMask src="/imgs/hero/hero2.jpg" alt="Masked hero image" label="2025: PZ | NOVA" />
     
     <div class="hero-text-wrap">
       <div class="hero-text-card">
         <div class="big-title" style="font-family: Unigeo slim; text-align: left;">
-          <br/><br/><br/><br/><br/>
+          <br/><br/><br/><br/>
           Wir gestalten <span style="font-family: Unigeo;">interaktive<br/>
           Installationen</span> für den<br/>
           öffentlichen Raum.
@@ -80,7 +81,7 @@ import InteractiveMask from "../components/InteractiveMask.astro";
         <div class="mask-gradient"></div> 
         <div class="big-title" style="text-align: left; z-index: 1;">
         Wir glauben daran, <span style="font-family: Unigeo slim;">dass</br>
-        Gestaltung und Technik</br>Menschen verbinden.</span></br></br></br></br>
+        Gestaltung und Technik</br>Menschen verbinden.</span></br></br>
       </div>
 
         <div class="small hero-lede" style="text-align: right;">
@@ -122,8 +123,8 @@ import InteractiveMask from "../components/InteractiveMask.astro";
   <!-- TEAM / STORIES-->
   <section class="section" style="background: #fff; z-index: 1;">
     <div class="container" style="position:relative; z-index:2;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; gap: 24px;">
-        <div class="big-title" style="font-size: clamp(44px, 6vw, 78px);">
+      <div style="display:flex; justify-content:flex-end; align-items:flex-end; gap:24px;">
+        <div class="big-title" style="font-size: clamp(44px, 6vw, 78px); text-align:right;">
           <span style="font-weight:600; color: var(--accent);">dream</span>team
         </div>
 
@@ -131,11 +132,11 @@ import InteractiveMask from "../components/InteractiveMask.astro";
       </div>
 
       <div style="margin-top: 22px;">
-        <BlobMask src="/imgs/team.jpg" alt="Team masked image" label="Absolut cooles Auto" />
+        <BlobMaskTeam src="/imgs/team.png" alt="Team image" label="Alexandra Rode" />
       </div>
     </div>
-<!-- WHITE BOX END -->
   </section>
+  <!-- WHITE BOX END -->
 
   <section class="section overlap-section" style="z-index: 0;">
     <div class="overlap-label">

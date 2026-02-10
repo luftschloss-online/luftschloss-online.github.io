@@ -8,12 +8,16 @@ const {
 <section class="blur-reveal" data-radius={radius}>
   <!-- blurred base -->
   <div class="layer layer--blur">
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
   </div>
 
   <!-- sharp reveal -->
   <div class="layer layer--sharp">
-    <slot />
+    <div class="content">
+      <slot />
+    </div>
   </div>
 
   <script is:inline>
@@ -77,22 +81,27 @@ const {
     transition: --r 280ms cubic-bezier(.2,.8,.2,1);
   }
 
+  .content{
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .layer{
-    max-width: min(var(--max), calc(100% - 64px));
     margin: 0 auto;
     padding: 22px 0;
   }
-
+  
   .layer--sharp,
   .layer--blur{
     transition:
-      -webkit-mask-image 280ms cubic-bezier(.2,.8,.2,1),
-      mask-image 280ms cubic-bezier(.2,.8,.2,1);
+    -webkit-mask-image 280ms cubic-bezier(.2,.8,.2,1),
+    mask-image 280ms cubic-bezier(.2,.8,.2,1);
 
-    /* counter left viewport bleed */
-    padding-inline: calc(var(--blur-amt, 10px) * 2);
-
+    margin-inline: 0px;
+    padding-inline: 0px;
   }
+  
+  .blur-reveal{ --blur-amt: 10px; }
 
   .layer--blur{
     filter: blur(var(--blur-amt, 10px));
@@ -140,8 +149,17 @@ const {
     /* avoid flicker */
     will-change: -webkit-mask-image, mask-image;
   }
-</style>
 
-<style>
-  .blur-reveal{ --blur-amt: 10px; }
+  @media (max-width: 760px){
+  .layer{
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .layer--sharp,
+  .layer--blur{
+    padding-inline: calc(var(--blur-amt, 10px) * 2);
+  }
+}
+
 </style>

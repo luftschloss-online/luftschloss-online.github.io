@@ -1,0 +1,124 @@
+---
+const {
+  src = "/images/hero.jpg",
+  alt = "",
+  label = "2025: PZ | NOVA",
+} = Astro.props;
+---
+
+<div class="mask-wrap" aria-label={alt}>
+  <!-- gradient blob behind -->
+  <div class="mask-media-blur" aria-hidden="true"></div>
+  <!-- main img front -->
+  <div class="mask-media">
+    <img src={src} alt={alt} />
+  </div>
+
+  <div class="mask-tag">{label}</div>
+</div>
+
+<style>
+  .mask-wrap{
+    position: relative;
+    width: min(760px, 100%);
+    margin: auto;
+    margin-left: auto;
+    padding: 32px 0;
+    z-index: 2;
+  }
+
+  .mask-media-blur{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+
+    width: 85%;
+    aspect-ratio: 16 / 7;
+
+    background: linear-gradient(180deg, #F4A3B4 40%, #A3B8CA 100%);
+    filter: blur(26px);
+    opacity: 0.80;
+
+    transform-origin: right;
+    transform: translateX(30%) translateY(50%) scale(1.2);
+
+    -webkit-mask-image: url("/mask/blob-mask-blur.png");
+    mask-image: url("/mask/blob-mask-blur.png");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+
+  .mask-media{
+    width: 120%;
+    aspect-ratio: 16 / 7;
+    overflow: visible;
+    position: relative;
+
+    transform: translateX(-20%);
+
+    -webkit-mask-image: url("/mask/blob-mask.png");
+    mask-image: url("/mask/blob-mask.png");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+  }
+
+  .mask-media img{
+    position:absolute;
+    width: 100%;
+    height: auto;
+    display:block;
+    inset: 0;
+
+    z-index: 2;
+
+    transform-origin: 50% 100%;
+    transform: translateY(-10%);
+
+    animation-name: imgParallax;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+}
+
+@keyframes imgParallax{
+  from { transform: translateY(-50%) }
+  to   { transform: translateY(50%) }
+  }
+
+  .mask-tag{
+    position:absolute;
+    z-index: 1;
+    left: 15%;
+    top: 45%;
+    transform: translate(0, -400%);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    border: 2px solid #A3B8CA;
+    padding: 6px 10px;
+  }
+
+@media (max-width: 760px){
+  .mask-media{
+    width: 90%;
+  }
+
+  .mask-tag{
+    left:15%;
+    top: 55%;
+  }
+}
+</style>

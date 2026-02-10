@@ -50,6 +50,8 @@ body{
   background: var(--bg);
   color: var(--fg);
   letter-spacing: -0.01em;
+
+  cursor: crosshair;
 }
 
 img, video, svg{
@@ -399,7 +401,7 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 
     width: 100%;
 
-    background: linear-gradient(180deg, #F4A3B4 10%, #A3B8CA 100%);
+    background: linear-gradient(180deg, #F4A3B4 20%, #A3B8CA 90%);
 
     filter: blur(26px);
     opacity: 0.80;
@@ -425,8 +427,8 @@ button{ font:inherit; color:inherit; background:none; border:0; padding:0; curso
 }
 
 @keyframes blobParallax{
-    from { transform: translateX(30%) translateY(20%) rotate(-25deg) scale(1.8); }
-    to   { transform: translateX(30%) translateY(-25%) rotate(-25deg) scale(1.8); }
+  from { transform: translateX(20%) translateY(-30%) rotate(-25deg) scale(1.8); }
+  to   { transform: translateX(40%) translateY(70%) rotate(-25deg) scale(1.8); }
   }
 
 @media (max-width: 900px){
